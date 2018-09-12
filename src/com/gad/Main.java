@@ -30,7 +30,10 @@ public class Main {
                 int c = scanner.nextInt();
                 System.out.println(new Z2_4(a, b, c));
                 break;
-
+            case "2.5":
+                n = scanner.nextInt();
+                System.out.println(new Z2_5(n));
+                break;
         }
     }
 }
