@@ -34,6 +34,9 @@ public class Main {
                 n = scanner.nextInt();
                 System.out.println(new Z2_5(n));
                 break;
+            case "2.6":
+                System.out.println(new Z2_6(scanner.next()));
+                break;
         }
     }
 }
