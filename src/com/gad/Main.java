@@ -69,6 +69,20 @@ public class Main {
                         System.out.println(Integer.toString(n) + ch + "n");
                     } while (ch != '=');
                     break;
+                case "8":
+                    Z8 p1 = new Z8();
+                    for (; ; ) {
+                        n = p1.next();
+                        if (n == -1) break;
+                        System.out.print(Integer.toString(n) + " ");
+                    }
+                    break;
+                case "9":
+                    Z9 p2 = new Z9();
+                    for (int i = 0; i < 55; i++) {
+                        System.out.print(Integer.toString(p2.next()) + " ");
+                    }
+                    break;
             }
         } catch (Throwable e) {
             System.out.println(e.toString());
