@@ -3,6 +3,7 @@ package com.gad;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -87,6 +88,14 @@ public class Main {
                 case "14":
                     n = scanner.nextInt();
                     System.out.println(Z14.factorize(n).stream().map(Object::toString)
+                            .collect(Collectors.joining(", ")));
+                    break;
+                case "15":
+                    System.out.println(Stream
+                            .iterate(new long[]{1, 1}, f -> new long[]{f[1], f[1] + f[0]})
+                            .limit(11)
+                            .map(p -> p[0])
+                            .map(Object::toString)
                             .collect(Collectors.joining(", ")));
                     break;
             }
