@@ -1,5 +1,6 @@
 package com.gad;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -97,6 +98,15 @@ public class Main {
                             .map(p -> p[0])
                             .map(Object::toString)
                             .collect(Collectors.joining(", ")));
+                    break;
+                case "16":
+                    long l = scanner.nextLong();
+                    System.out.println(Arrays
+                            .stream(Long
+                                    .toString(l)
+                                    .split(""))
+                            .mapToLong(f -> Long.valueOf(f))
+                            .sum());
                     break;
             }
         } catch (Throwable e) {
