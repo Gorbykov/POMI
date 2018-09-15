@@ -2,6 +2,7 @@ package com.gad;
 
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -82,6 +83,11 @@ public class Main {
                     for (int i = 0; i < 55; i++) {
                         System.out.print(Integer.toString(p2.next()) + " ");
                     }
+                    break;
+                case "14":
+                    n = scanner.nextInt();
+                    System.out.println(Z14.factorize(n).stream().map(Object::toString)
+                            .collect(Collectors.joining(", ")));
                     break;
             }
         } catch (Throwable e) {
