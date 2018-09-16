@@ -3,10 +3,12 @@ package com.gad;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Main {
+
 
     public static void main(String[] args) {
         try {
@@ -191,6 +193,7 @@ public class Main {
                                         )
                                 )
                         );
+                        break;
                     case "21":
                         n = random.nextInt(28800 + 1);
                         System.out.println(n);
@@ -226,12 +229,14 @@ public class Main {
                                 .limit(5)
                                 .toArray();
                         System.out.println(Arrays.toString(arr));
+                        //noinspection OptionalGetWithoutIsPresent
                         double average1 = IntStream.of(arr).average().getAsDouble();
                         arr = IntStream
                                 .generate(() -> random.nextInt(6))
                                 .limit(5)
                                 .toArray();
                         System.out.println(Arrays.toString(arr));
+                        //noinspection OptionalGetWithoutIsPresent
                         double average2 = IntStream.of(arr).average().getAsDouble();
                         n = Double.compare(average1, average2);
                         System.out.println(Double.toString(average1)
@@ -266,10 +271,109 @@ public class Main {
                                 .ifPresent(i -> System.out.println("max: arr[" + i + "] = " + arr[i]));
                         break;
                     }
+                    case "27": {
+                        int[] arr1 = IntStream
+                                .generate(() -> random.nextInt(10) + 1)
+                                .limit(10)
+                                .toArray();
+                        int[] arr2 = IntStream
+                                .generate(() -> random.nextInt(10) + 1)
+                                .limit(10)
+                                .toArray();
+                        System.out.println(Arrays.toString(arr1));
+                        System.out.println(Arrays.toString(arr2));
+                        double[] arrD = IntStream.range(0, arr1.length)
+                                .mapToDouble(i -> ((double) arr1[i]) / arr2[i])
+                                .toArray();
+                        System.out.println(Arrays.toString(arrD));
+                        System.out.println(DoubleStream.of(arrD)
+                                .filter(f -> Double.compare(f, Math.round(f)) == 0)
+                                .count()
+                        );
+                        break;
+                    }
+                    case "28": {
+                        int[] arr = IntStream
+                                .generate(() -> random.nextInt(3) - 1)
+                                .limit(11)
+                                .toArray();
+                        System.out.println(Arrays.toString(arr));
+                        IntStream.rangeClosed(-1, 1)
+                                .mapToObj(i -> new int[]{i
+                                        , (int) IntStream.of(arr)
+                                        .boxed()
+                                        .filter(f -> f == i)
+                                        .count()}
+                                )
+                                .reduce((f1, f2) ->
+                                        f1[1] - f2[1] > 0 ? f1
+                                                : (f1[1] - f2[1] < 0 ? f2 : new int[]{Integer.MAX_VALUE, f2[1]})
+                                )
+                                .ifPresent(f -> {
+                                            if (f[0] != Integer.MAX_VALUE) {
+                                                System.out.println(f[0] + " встречается " + f[1] + " раз");
+                                            }
+                                        }
+                                );
+                        break;
+                    }
+                    case "30": {
+                        int[] pA = IntStream
+                                .generate(() -> random.nextInt(10) + 1)
+                                .limit(6)
+                                .toArray();
+                        int[] nA = IntStream
+                                .generate(() -> -(random.nextInt(10) + 1))
+                                .limit(6)
+                                .toArray();
+                        List<Integer> outL = IntStream
+                                .concat(IntStream.of(pA), IntStream.of(nA))
+                                .boxed()
+                                .collect(Collectors.toList());
+                        Collections.shuffle(outL, random);
+                        System.out.println(Arrays.toString(outL.toArray()));
+                        break;
+                    }
+                    case "32": {
+                        int[][] arr = Stream.generate(() ->
+                                IntStream.generate(() -> random.nextInt(10))
+                                        .limit(7)
+                                        .toArray())
+                                .limit(6)
+                                .toArray(int[][]::new);
+                        Stream.of(arr)
+                                .forEach(f -> System.out.println(Arrays.toString(f)));
+                        System.out.println("---------------------");
+                        for (int[] f : arr) {
+                            List<Integer> buf = Arrays.stream(f).boxed().collect(Collectors.toList());
+                            Collections.swap(buf, 0,
+                                    IntStream.range(0, 7)
+                                            .mapToObj(i -> new int[]{i, f[i]})
+                                            .max(Comparator.comparingInt(g -> g[1]))
+                                            .map(g -> g[0])
+                                            .get()
+                            );
+                            System.out.println(Arrays.toString(buf.toArray()));
+                        }
+                        break;
+                    }
+                    case "33": {
+                        List<String> outL = IntStream.rangeClosed(2, 9)
+                                .mapToObj(i -> IntStream.rangeClosed(2, i)
+                                        .mapToObj(j -> Integer.toString(i) + "*" + Integer.toString(j))
+                                )
+                                .flatMap(f -> f)
+                                .collect(Collectors.toList());
+                        Collections.shuffle(outL, random);
+                        System.out.println(String.join("\n", outL.subList(0, 15)));
+                        break;
+                    }
                 }
+
             } while (!z.equals("e"));
         } catch (Throwable e) {
-            System.out.println(e.toString());
+            e.printStackTrace();
         }
     }
 }
+
