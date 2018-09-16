@@ -190,7 +190,7 @@ public class Main {
                             )
                     );
                 case "21":
-                    n = random.nextInt(28801);
+                    n = random.nextInt(28800 + 1);
                     System.out.println(n);
                     n = Math.floorDiv(n, 60 * 60);
                     if (n > 1)
@@ -202,6 +202,56 @@ public class Main {
                             System.out.println("The End of The Working Day is near ");
                     }
                     break;
+                case "22": {
+                    int[] arr;
+                    arr = IntStream
+                            .generate(() -> random.nextInt(10) + 1)
+                            .limit(8)
+                            .toArray();
+                    System.out.println(Arrays.toString(arr));
+                    System.out.println(Arrays
+                            .toString(IntStream
+                                    .range(0, 8)
+                                    .map(i -> (i % 2 == 0) ? arr[i] : 0)
+                                    .toArray()
+                            )
+                    );
+                    break;
+                }
+                case "23": {
+                    int[] arr = IntStream
+                            .generate(() -> random.nextInt(6))
+                            .limit(5)
+                            .toArray();
+                    System.out.println(Arrays.toString(arr));
+                    double average1 = IntStream.of(arr).average().getAsDouble();
+                    arr = IntStream
+                            .generate(() -> random.nextInt(6))
+                            .limit(5)
+                            .toArray();
+                    System.out.println(Arrays.toString(arr));
+                    double average2 = IntStream.of(arr).average().getAsDouble();
+                    n = Double.compare(average1, average2);
+                    System.out.println(Double.toString(average1)
+                            + ((n == 0) ? " = " : (n > 0 ? " > " : " < "))
+                            + Double.toString(average2)
+                    );
+                    break;
+                }
+                case "24": {
+                    int[] arr = IntStream
+                            .generate(() -> random.nextInt(100 - 10) + 10)
+                            .limit(4)
+                            .toArray();
+                    System.out.println(Arrays.toString(arr));
+                    System.out.println(IntStream
+                            .range(0, arr.length - 1)
+                            .map(i -> arr[i + 1] - arr[i])
+                            .filter(f -> f > 0)
+                            .count() == 0 ? "Возрастающая\uD83D\uDCA9" : "Невозрастающая или убывающая\uD83D\uDCA9"
+                    );
+                    break;
+                }
             }
         } catch (Throwable e) {
             System.out.println(e.toString());
