@@ -1,15 +1,16 @@
 package com.gad;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Main {
 
     public static void main(String[] args) {
         try {
+            Random random = new Random();
             Scanner scanner = new Scanner(System.in);
             String z = scanner.next();
             switch (z) {
@@ -89,7 +90,8 @@ public class Main {
                 case "14":
                     n = scanner.nextInt();
                     System.out.println(Z14.factorize(n).stream().map(Object::toString)
-                            .collect(Collectors.joining(", ")));
+                            .collect(Collectors.joining(", "))
+                    );
                     break;
                 case "15":
                     System.out.println(Stream
@@ -97,7 +99,8 @@ public class Main {
                             .limit(11)
                             .map(p -> p[0])
                             .map(Object::toString)
-                            .collect(Collectors.joining(", ")));
+                            .collect(Collectors.joining(", "))
+                    );
                     break;
                 case "16":
                     long l = scanner.nextLong();
@@ -105,9 +108,87 @@ public class Main {
                             .stream(Long
                                     .toString(l)
                                     .split(""))
-                            .mapToLong(f -> Long.valueOf(f))
-                            .sum());
+                            .mapToLong(Long::valueOf)
+                            .sum()
+                    );
                     break;
+                case "17":
+                    System.out.println(
+                            Stream.iterate(IntStream
+                                            .generate(() -> 0)
+                                            .limit(6)
+                                            .toArray(),
+                                    f -> {
+                                        boolean flag = false;
+                                        int i = 0;
+                                        do {
+                                            flag = false;
+                                            f[i]++;
+                                            if (f[i] == 10) {
+                                                f[i] = 0;
+                                                flag = true;
+                                            }
+                                            i++;
+                                        } while ((flag) && (i < 6));
+                                        return f;
+                                    })
+                                    .limit(1000000)
+                                    .skip(1)
+                                    .filter(f -> (f[0] + f[1] + f[2]) == (f[3] + f[4] + f[5]))
+                                    .count()
+                    );
+                    break;
+                case "18":
+                    System.out.println(
+                            Stream.iterate(IntStream
+                                            .generate(() -> 0)
+                                            .limit(6)
+                                            .toArray(),
+                                    f -> {
+                                        boolean flag = false;
+                                        int i = 0;
+                                        do {
+                                            flag = false;
+                                            f[i]++;
+                                            if (f[i] == 10) {
+                                                f[i] = 0;
+                                                flag = true;
+                                            }
+                                            i++;
+                                        } while ((flag) && (i < 6));
+                                        return f;
+                                    })
+                                    .limit(1000000)
+                                    .skip(1)
+                                    .map(f -> Arrays
+                                            .stream(f)
+                                            .mapToObj(Objects::toString)
+                                            .collect(Collectors
+                                                    .joining("")))
+                                    .filter(f -> f.contains("13") || f.contains("4"))
+                                    .count()
+                    );
+                    break;
+                case "19":
+                    n = random.nextInt(166 - 5) + 5;
+                    if ((n > 25) && (n < 100))
+                        System.out.println(Integer.toString(n) + " ∈ (25, 100)");
+                    else
+                        System.out.println(Integer.toString(n) + " ∉ (25, 100)");
+                    break;
+                case "20":
+                    n = random.nextInt(1000 - 100) + 100;
+                    System.out.println("Max digit in "
+                            + Integer.toString(n)
+                            + " is "
+                            + Collections
+                            .max(Arrays
+                                    .asList(Integer
+                                            .toString(n)
+                                            .split("")
+                                    )
+                            )
+                    );
             }
         } catch (Throwable e) {
             System.out.println(e.toString());
