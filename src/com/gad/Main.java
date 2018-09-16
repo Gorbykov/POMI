@@ -119,7 +119,7 @@ public class Main {
                                             .limit(6)
                                             .toArray(),
                                     f -> {
-                                        boolean flag = false;
+                                        boolean flag;
                                         int i = 0;
                                         do {
                                             flag = false;
@@ -145,7 +145,7 @@ public class Main {
                                             .limit(6)
                                             .toArray(),
                                     f -> {
-                                        boolean flag = false;
+                                        boolean flag;
                                         int i = 0;
                                         do {
                                             flag = false;
@@ -189,6 +189,19 @@ public class Main {
                                     )
                             )
                     );
+                case "21":
+                    n = random.nextInt(28801);
+                    System.out.println(n);
+                    n = Math.floorDiv(n, 60 * 60);
+                    if (n > 1)
+                        System.out.println("There are " + n + " hours left, until The End of The Working Day");
+                    else {
+                        if (n == 1)
+                            System.out.println("There is an hour left until The End of The Working Day");
+                        else if (n == 0)
+                            System.out.println("The End of The Working Day is near ");
+                    }
+                    break;
             }
         } catch (Throwable e) {
             System.out.println(e.toString());
