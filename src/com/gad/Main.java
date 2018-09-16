@@ -368,6 +368,83 @@ public class Main {
                         System.out.println(String.join("\n", outL.subList(0, 15)));
                         break;
                     }
+                    case "35": {
+                        a = scanner.nextInt();
+                        b = scanner.nextInt();
+                        int[][] arr = Stream.generate(() ->
+                                IntStream.generate(() -> random.nextInt(100))
+                                        .limit(b)
+                                        .toArray())
+                                .limit(a)
+                                .peek(f -> System.out.println(Arrays.toString(f)))
+                                .toArray(int[][]::new);
+                        int sum[] = new int[b];
+                        Arrays.fill(sum, 0);
+                        for (int i = 0; i < a; i++) {
+                            for (int j = 0; j < b; j++) {
+                                sum[j] += arr[i][j];
+                            }
+                        }
+                        int k = 0;
+                        for (int i = 0; i < a; i++) {
+                            for (int j = 0; j < b; j++) {
+                                if (2 * arr[i][j] > sum[j]) k++;
+                            }
+                        }
+                        System.out.println(k);
+                        break;
+                    }
+                    case "39": {
+                        a = scanner.nextInt();
+                        b = scanner.nextInt();
+                        int[][] arr = Stream.generate(() ->
+                                IntStream.generate(() -> random.nextInt(201) - 100)
+                                        .limit(b)
+                                        .toArray())
+                                .limit(a)
+                                .peek(f -> System.out.println(Arrays.toString(f)))
+                                .toArray(int[][]::new);
+                        c = scanner.nextInt();
+                        int maxI = 0, maxJ = 0, max = Integer.MIN_VALUE;
+                        for (int i = 0; i < a; i++) {
+                            for (int j = 0; j < b; j++) {
+                                if (max < arr[i][j]) {
+                                    maxI = i;
+                                    maxJ = j;
+                                    max = Math.abs(arr[i][j]);
+                                }
+                            }
+                        }
+                        List<List<Integer>> list = Stream.of(arr)
+                                .map(f -> IntStream.of(f)
+                                        .boxed()
+                                        .collect(Collectors.toList()
+                                        )
+                                ).collect(Collectors.toList());
+                        for (List<Integer> line : list) {
+                            Collections.swap(line, c, maxJ);
+                        }
+                        Collections.swap(list, c, maxI);
+                        list.forEach(f -> System.out.println(Arrays.toString(f.toArray())));
+                        break;
+                    }
+                    case "40": {
+                        int m = scanner.nextInt();
+                        int[][] arr = Stream.generate(() ->
+                                IntStream.generate(() -> random.nextInt(201) - 100)
+                                        .limit(m)
+                                        .toArray())
+                                .limit(m)
+                                .peek(f -> System.out.println(Arrays.toString(f)))
+                                .toArray(int[][]::new);
+                        System.out.println("---------------------");
+                        Stream.of(arr)
+                                .map(f -> IntStream.of(f)
+                                        .map(g -> g <= 0 ? 0 : 1)
+                                        .toArray()
+                                )
+                                .forEach(f -> System.out.println(Arrays.toString(f)));
+                    }
                 }
 
             } while (!z.equals("e"));
