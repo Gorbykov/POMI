@@ -112,7 +112,7 @@ public class Main {
                     }
                     case "13": {
                         int m = scanner.nextInt();
-                        System.out.println(Arrays.toString(LongStream.rangeClosed(2, m/2)
+                        System.out.println(Arrays.toString(LongStream.rangeClosed(2, m / 2)
                                 .filter(f -> m % f == 0)
                                 .toArray())
                         );
@@ -346,7 +346,7 @@ public class Main {
                         break;
                     }
                     case "29": {
-                        while ((n = scanner.nextInt()) % 2 == 1) ;
+                        while ((n = scanner.nextInt()) % 2 == 1 && n > 0) ;
                         int[] arr = IntStream
                                 .generate(() -> random.nextInt(11) - 5)
                                 .limit(n)
@@ -379,6 +379,20 @@ public class Main {
                                 .collect(Collectors.toList());
                         Collections.shuffle(outL, random);
                         System.out.println(Arrays.toString(outL.toArray()));
+                        break;
+                    }
+
+                    case "31": {
+                        while ((n = scanner.nextInt()) <= 3) ;
+                        int m = n;
+                        int[] arr = IntStream.generate(() -> random.nextInt(m + 1))
+                                .limit(m)
+                                .toArray();
+                        System.out.println(Arrays.toString(arr));
+                        int[] arrOdd = IntStream.of(arr)
+                                .filter(f -> f % 2 == 0)
+                                .toArray();
+                        System.out.println(Arrays.toString(arrOdd));
                         break;
                     }
                     case "32": {
