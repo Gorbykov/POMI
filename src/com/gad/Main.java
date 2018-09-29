@@ -2,10 +2,7 @@ package com.gad;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.stream.*;
 
 public class Main {
 
@@ -91,6 +88,36 @@ public class Main {
                             System.out.print(Integer.toString(p2.next()) + " ");
                         }
                         break;
+                    case "10": {
+                        System.out.println(Arrays.toString(IntStream.iterate(90, f -> f - 5)
+                                .takeWhile(f -> f >= 0)
+                                .toArray())
+                        );
+                        break;
+                    }
+                    case "11": {
+                        System.out.println(Arrays.toString(IntStream.iterate(2, f -> 2 * f - 1)
+                                .takeWhile(f -> f < 10000)
+                                .toArray())
+                        );
+                        break;
+                    }
+                    case "12": {
+                        System.out.println(Arrays.toString(IntStream.iterate(-166, f -> 2 * f + 200)
+                                .takeWhile(f -> f < 100)
+                                .filter(f -> Integer.toString(Math.abs(f)).length() == 2)
+                                .toArray())
+                        );
+                        break;
+                    }
+                    case "13": {
+                        int m = scanner.nextInt();
+                        System.out.println(Arrays.toString(LongStream.rangeClosed(2, m/2)
+                                .filter(f -> m % f == 0)
+                                .toArray())
+                        );
+                        break;
+                    }
                     case "14":
                         n = scanner.nextInt();
                         System.out.println(Z14.factorize(n).stream().map(Object::toString)
