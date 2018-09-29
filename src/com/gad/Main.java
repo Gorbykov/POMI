@@ -125,9 +125,10 @@ public class Main {
                         );
                         break;
                     case "15":
+                    case "25":
                         System.out.println(Stream
                                 .iterate(new long[]{1, 1}, f -> new long[]{f[1], f[1] + f[0]})
-                                .limit(11)
+                                .limit(z.equals("15") ? 11 : z.equals("25") ? 20 : 0)
                                 .map(p -> p[0])
                                 .map(Object::toString)
                                 .collect(Collectors.joining(", "))
@@ -342,6 +343,25 @@ public class Main {
                                             }
                                         }
                                 );
+                        break;
+                    }
+                    case "29": {
+                        while ((n = scanner.nextInt()) % 2 == 1) ;
+                        int[] arr = IntStream
+                                .generate(() -> random.nextInt(11) - 5)
+                                .limit(n)
+                                .toArray();
+                        System.out.println(Arrays.toString(arr));
+                        arr = IntStream.of(arr)
+                                .map(Math::abs)
+                                .toArray();
+                        a = IntStream.of(arr)
+                                .limit(n / 2)
+                                .sum();
+                        b = IntStream.of(arr)
+                                .skip(n / 2)
+                                .sum();
+                        System.out.println(a + ((a > b) ? " > " : (a < b) ? " < " : " = ") + b);
                         break;
                     }
                     case "30": {
