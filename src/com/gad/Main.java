@@ -429,6 +429,31 @@ public class Main {
                         System.out.println(String.join("\n", outL.subList(0, 15)));
                         break;
                     }
+                    case "34": {
+                        n = scanner.nextInt();
+                        int[][] mat = new int[n][n];
+                        for (int i = 0; i < n; i++) {
+                            for (int j = 0; j < n; j++) {
+                                mat[i][j] = random.nextInt(201) - 100;
+                            }
+                        }
+                        Stream.of(mat)
+                                .forEach(f -> System.out.println(Arrays.toString(f)));
+                        int k = 0;
+                        int sum = 0;
+                        for (int i = 0; i < n; i++) {
+                            for (int j = 0; j < n; j++) {
+                                if (j > i) {
+                                    if (mat[i][j] > 0) {
+                                        k++;
+                                        sum += mat[i][j];
+                                    }
+                                }
+                            }
+                        }
+                        System.out.println("k = " + k + ", sum = " + sum);
+                        break;
+                    }
                     case "35": {
                         a = scanner.nextInt();
                         b = scanner.nextInt();
@@ -454,6 +479,9 @@ public class Main {
                         }
                         System.out.println(k);
                         break;
+                    }
+                    case "36": {
+
                     }
                     case "39": {
                         a = scanner.nextInt();
