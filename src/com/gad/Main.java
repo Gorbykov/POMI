@@ -481,7 +481,38 @@ public class Main {
                         break;
                     }
                     case "36": {
-
+                        Matrix matrix = new Matrix(scanner.nextInt());
+                        matrix.generateRandom();
+                        matrix.print();
+                        MatrixElement maxDiag = matrix.max((i, j) -> i == j);
+                        n = scanner.nextInt();
+                        matrix.swapRow(n, maxDiag.i);
+                        matrix.print();
+                        break;
+                    }
+                    case "37": {
+                        a = scanner.nextInt();
+                        b = scanner.nextInt();
+                        Matrix matrix = new Matrix(a, b);
+                        matrix.generateRandom();
+                        matrix.print();
+                        System.out.println("-------------");
+                        for (int k = 0; k < a; k++) {
+                            int _k = k;
+                            MatrixElement max = matrix.max((i, j) -> _k == i);
+                            MatrixElement min = matrix.min((i, j) -> _k == i);
+                            matrix.swap(k, max.j, k, 0);
+                            matrix.swap(k, min.j, k, b - 1);
+                        }
+                        matrix.print();
+                        break;
+                    }
+                    case "38": {
+                        Matrix matrix = new Matrix(scanner.nextInt());
+                        matrix.generateRandom(0, 3);
+                        matrix.print();
+                        System.out.println(matrix.isMagic() ? "MAGIC!!!!!" : "regular");
+                        break;
                     }
                     case "39": {
                         a = scanner.nextInt();
